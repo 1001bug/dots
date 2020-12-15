@@ -3,7 +3,7 @@ set langmenu=en_US
 syntax on
 "set guifont=Consolas:h12:cRUSSIAN:qDRAFT
 "set guifont=Terminus:h12:cRUSSIAN:qDRAFT
-set guifont=Liberation_Mono:h12:cRUSSIAN:qDRAFT
+set guifont=Liberation\ Mono\ 12,Liberation_Mono:h12:cRUSSIAN:qDRAFT
 
 set number
 set laststatus=2
