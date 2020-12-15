@@ -9,8 +9,8 @@ set number
 set laststatus=2
 set ruler
 set modeline
-winsize 150 40
-winpos 70 70
+" winsize 150 40
+" winpos 70 70
 set backspace=indent,eol,start
 set magic
 set warn
@@ -94,7 +94,7 @@ vnoremap <silent> # :<C-U>
   \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gVzv:call setreg('"', old_reg, old_regtype)<CR>
-set mouse=a
+" set mouse=a
 
 
 
