@@ -1,88 +1,166 @@
-colo slate
-set langmenu=en_US
-syntax on
-"set guifont=Consolas:h12:cRUSSIAN:qDRAFT
-"set guifont=Terminus:h12:cRUSSIAN:qDRAFT
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=500
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
+" Set to auto read when a file is changed from the outside
+set autoread
+autocmd FocusGained,BufEnter * checktime
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+"let mapleader = "\"
+
+
+" :W sudo saves the file 
+" (useful for handling the permission-denied error)
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+" Automatically save before :next, :make etc.
+set autowrite
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set 7 lines to the cursor - when moving vertically using j/k
+set scrolloff=7
+
+" GUI Lang
+let $LANG='en' 
+set langmenu=en
+
+"win and nix var
 set guifont=Liberation\ Mono\ 12,Liberation_Mono:h12:cRUSSIAN:qDRAFT
 
 set number
-set laststatus=2
-set ruler
 set modeline
-" winsize 150 40
-" winpos 70 70
-set backspace=indent,eol,start
-set magic
 set warn
-"set autoread
+set showcmd
 
-"search with case if needle with case
-"set smartcase
-"search while type search string ^G ^T to next prrev. enter to move to found
-"set incsearch
-filetype plugin indent on
+set completeopt=menuone,noinsert,noselect,preview
+
+" Turn on the Wild menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,.git\*
+
+"Always show current position
+set ruler
+
+" Height of the command bar
+set cmdheight=2
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
 
 
-set showcmd                     " Show me what I'm typing
-set encoding=utf-8              " Set default encoding to UTF-8
-set autowrite                   " Automatically save before :next, :make etc.
-set autoread                    " Automatically reread changed files without asking me anything
-set laststatus=2
-set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
-set incsearch                   " Shows the match while typing
-set hlsearch                    " Highlight found searches
-set ignorecase                  " Search case insensitive...
-set smartcase                   " ... but not when search pattern contains upper case characters
-"set ttyfast "?????
+" Ignore case when searching
+set ignorecase
 
-"set autoindent
-"set smartindent
-"set complete-=i
-"set showmatch
-"set smarttab
+" When searching try to be smart about cases 
+set smartcase
 
-" In many terminal emulators the mouse works just fine, thus enable it.
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch 
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw 
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch 
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+
+"qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe, qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe, qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe qwe 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123
+"asdadsasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd, asdasdasd,asd asdasd,ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssssssssssssssssssss sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable 
+
+" Enable 256 colors palette in Gnome Terminal
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
+
+try
+    colorscheme desert
+"    colorscheme slate
+catch
+endtry
+
+set background=dark
+
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set t_Co=256
+
+    winsize 150 40
+    winpos 70 70
+
+
 if has('mouse')
   set mouse=a
 endif
 
-" Better split switching
-"map <C-j> <C-W>j
-"map <C-k> <C-W>k
-"map <C-h> <C-W>h
-"map <C-l> <C-W>l
+endif
 
-" Center the screen
-"nnoremap <space> zz
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
 
-" Set 80 character line limit
-"if exists('+colorcolumn')
-"  set colorcolumn=80
-"else
+" Use Unix as the standard file type
+set fileformats=unix,dos,mac
 
 
-" Give more space for displaying messages.
-"set cmdheight=2
 
 
-" For all text files set 'textwidth' to 80 characters.
-"autocmd FileType text setlocal textwidth=80 fo+=2t noexpandtab
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"==========================================================
+" Be smart when using tabs ;)
+set smarttab
 
-autocmd Filetype perl set tabstop=4 expandtab shiftwidth=4 shiftround matchpairs+=<:>
-autocmd FileType perl setlocal equalprg=perltidy
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
 
-"disable hightlight by # or *
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
-set listchars=eol:•,tab:>+,trail:~,extends:+,precedes:<,space:·
-nnoremap <silent> <F3> :set list!<CR>
+"Auto indent
+set autoindent
 
-set pastetoggle=<F2>
-" disable auto # add on new line
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"Smart indent
+set smartindent
 
+"Wrap lines
+set wrap 
+
+
+""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
@@ -94,7 +172,65 @@ vnoremap <silent> # :<C-U>
   \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gVzv:call setreg('"', old_reg, old_regtype)<CR>
-" set mouse=a
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Disable highlight when <leader><cr> is pressed
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
+
+
+
+
+
+
+""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd Filetype perl noremap <F5> :call CheckPerlSyntax()<CR>
+autocmd Filetype perl noremap  <silent> <F6>    :cclose<CR>
+autocmd Filetype perl noremap  <silent> <F7>    :cp<CR>
+autocmd Filetype perl snoremap  <silent> <F8>    :cn<CR>
+
+
+
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd Filetype perl set tabstop=4 expandtab shiftwidth=4 shiftround matchpairs+=<:>
+autocmd FileType perl setlocal equalprg=perltidy
+set listchars=eol:],tab:>+,trail:~,extends:+,precedes:<,space:_
+nnoremap <silent> <F3> :set list!<CR>
+
+set pastetoggle=<F2>
+
+" disable auto # add on new line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 
 
@@ -119,15 +255,4 @@ func! CheckPerlSyntax()
     let &makeprg     = map
     let &errorformat = ef
 endfunc
-
-" nmap pl :!perl %<.pl<CR>
-autocmd Filetype perl noremap <F5> :call CheckPerlSyntax()<CR>
-autocmd Filetype perl noremap  <silent> <F6>    :cclose<CR>
-autocmd Filetype perl noremap  <silent> <F7>    :cp<CR>
-autocmd Filetype perl snoremap  <silent> <F8>    :cn<CR>
-" noremap  <silent> <F5>    :copen<CR>
-
-
-
-
 
