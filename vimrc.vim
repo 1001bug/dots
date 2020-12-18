@@ -33,7 +33,7 @@ set autowrite
 set scrolloff=7
 
 " GUI Lang
-let $LANG='en' 
+" let $LANG='en' 
 set langmenu=en
 
 "win and nix var
