@@ -231,7 +231,7 @@ autocmd Filetype perl snoremap  <silent> <F8>    :cn<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd Filetype perl set tabstop=4 expandtab shiftwidth=4 shiftround matchpairs+=<:>
 autocmd FileType perl setlocal equalprg=perltidy
-set listchars=eol:],tab:>+,trail:~,extends:+,precedes:<,space:%
+set listchars=eol:],tab:>+,trail:~,extends:+,precedes:<,nbsp:%
 if v:version > 704
     set listchars+=space:?
 endif
