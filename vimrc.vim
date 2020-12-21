@@ -48,7 +48,10 @@ set modeline
 set warn
 set showcmd
 
-set completeopt=menuone,noinsert,noselect,preview
+set completeopt=menuone,noselect,preview
+if v:version > 704
+    set completeopt+=noinsert
+endif
 
 " Turn on the Wild menu
 set wildmenu
