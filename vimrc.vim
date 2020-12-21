@@ -48,9 +48,9 @@ set modeline
 set warn
 set showcmd
 
-set completeopt=menuone,noselect,preview
+set completeopt=menuone,preview
 if v:version > 704
-    set completeopt+=noinsert
+    set completeopt+=noinsert,noselect
 endif
 
 " Turn on the Wild menu
@@ -231,7 +231,11 @@ autocmd Filetype perl snoremap  <silent> <F8>    :cn<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd Filetype perl set tabstop=4 expandtab shiftwidth=4 shiftround matchpairs+=<:>
 autocmd FileType perl setlocal equalprg=perltidy
-set listchars=eol:],tab:>+,trail:~,extends:+,precedes:<,space:_
+set listchars=eol:],tab:>+,trail:~,extends:+,precedes:<,space:%
+if v:version > 704
+    set listchars+=space:?
+endif
+
 nnoremap <silent> <F3> :set list!<CR>
 
 set pastetoggle=<F2>
