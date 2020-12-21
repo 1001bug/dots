@@ -1,8 +1,12 @@
 
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"language messages en_US.utf8
+language en_US.utf8
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -34,7 +38,7 @@ set scrolloff=7
 
 " GUI Lang
 " let $LANG='en' 
-set langmenu=en
+set langmenu=none
 
 "win and nix var
 set guifont=Liberation\ Mono\ 12,Liberation_Mono:h12:cRUSSIAN:qDRAFT
